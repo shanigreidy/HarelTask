@@ -27,19 +27,23 @@ export default () => {
         dispatch(authActions.login(inputsFields, from));
     }
 
+    const handleLoginBtnClicked = () => {
+        setIsloggingInProccess(true);
+    }
+
     return (
         <div className="col-lg-8 offset-lg-2">
             {
                 authHelper.isAuthenticated()
                 ?
-                <h2>You are Already Logged in :)</h2>
+                <h4>You are Already Logged in :)</h4>
                 :
                 <div>
                 <h2>Login</h2>
                     <form name="form" onSubmit={handleSubmit}>
                         <Inputs inputsFields={inputsFields} handleChange={handleChange} />
                         <div className="form-group">
-                            <button className="btn btn-primary" style={{width: '100%', marginTop: '10px'}}>
+                            <button className="btn btn-primary" style={{width: '100%', marginTop: '10px'}} onClick={handleLoginBtnClicked}>
                                 {
                                     isloggingInProccess && <span className="spinner-border spinner-border-sm mr-1"></span>
                                 }

@@ -19,7 +19,7 @@ const login = (user, from) => {
             history.push(from);
         } catch(err) {
             dispatch({ type: authConstants.LOGIN_FAILURE, err });
-            dispatch(alertActions.error(error.toString()));
+            dispatch(alertActions.error(err.toString()));
         }
     }
 }
