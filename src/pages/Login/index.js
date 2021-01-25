@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useLocation } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import authActions from '../../actions/authentication';
 import authHelper from '../../helpers/authentication';
 import Inputs from '../../components/login/Inputs';
