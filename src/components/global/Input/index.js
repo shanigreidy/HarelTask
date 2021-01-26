@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import './style.css'
+import './style.css';
 
 export default ({ input = {} , handleChange = (e) => {e.preventDefault();}, containerClass = '' ,invalidInputClass = '', checkValidation = false }) => {
     const [isInvalidInput, setIsInvalidInput] = useState(false);
