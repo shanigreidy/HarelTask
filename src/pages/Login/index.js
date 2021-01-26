@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
+import { isMobile } from "react-device-detect";
 import authActions from '../../actions/authentication';
 import authHelper from '../../helpers/authentication';
 import Inputs from '../../components/login/Inputs';
@@ -23,16 +24,13 @@ export default () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
+        setIsloggingInProccess(true);
         const { from } = location.state || { from: { pathname: "/" } };
         dispatch(authActions.login(inputsFields, from));
     }
 
-    const handleLoginBtnClicked = () => {
-        setIsloggingInProccess(true);
-    }
-
     return (
-        <div className="col-lg-8 offset-lg-2">
+        <div className={ isMobile ? "col-md-8" : "col-md-5"} style={{ margin: isMobile ? '50% auto' : '10% auto'}}>
             {
                 authHelper.isAuthenticated()
                 ?
@@ -42,8 +40,8 @@ export default () => {
                 <h2>Login</h2>
                     <form name="form" onSubmit={handleSubmit}>
                         <Inputs inputsFields={inputsFields} handleChange={handleChange} />
-                        <div className="form-group">
-                            <button className="btn btn-primary" style={{width: '100%', marginTop: '10px'}} onClick={handleLoginBtnClicked}>
+                        <div className="form-group" style={{ display: 'flex' }}>
+                            <button className="btn btn-primary" style={{width: '50%', margin: '20px auto', height: '50px'}}>
                                 {
                                     isloggingInProccess && <span className="spinner-border spinner-border-sm mr-1"></span>
                                 }

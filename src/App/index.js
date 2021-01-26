@@ -18,21 +18,19 @@ export default () => {
     }, []);
 
     return (
-        <div className="jumbotron">
-            <div className="container">
-                <div className="col-md-8 offset-md-2">
-                        {alert?.message &&
-                            <div className={`alert ${alert.type}`}>{alert.message}</div>
-                        }
-                    <div className="col-md-8 offset-md-2">
-                        <Router history={history}>
-                            <Switch>
-                                <PrivateRoute exact path="/" component={Home} />
-                                <Route path="/login" component={Login} />
-                                <Redirect from="*" to="/" />
-                            </Switch>
-                        </Router>
-                    </div>
+        <div className="container">
+            <div>
+                    {alert?.message &&
+                        <div className={`alert ${alert.type}`}>{alert.message}</div>
+                    }
+                <div>
+                    <Router history={history}>
+                        <Switch>
+                            <PrivateRoute exact path="/" component={Home} />
+                            <Route path="/login" component={Login} />
+                            <Redirect from="*" to="/" />
+                        </Switch>
+                    </Router>
                 </div>
             </div>
         </div>

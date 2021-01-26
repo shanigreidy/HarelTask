@@ -17,11 +17,6 @@ export const Table = {
           options: {
             filter: true,
             sort: true,
-            sortCompare: (order = 'desc') => {
-                return (obj1, obj2) => {
-                  return (val1 - val2) * (order === 'asc' ? 1 : -1);
-                };
-              }
            }
         },
         {
@@ -56,11 +51,5 @@ export const Table = {
         download: false,
         print: false,
         filter: true,
-        responsive: 'vertical',
-        customSort: (data, colIndex, order, meta) => {
-            return data.sort((a, b) => {
-              return (a.data[colIndex].length < b.data[colIndex].length ? -1: 1 ) * (order === 'desc' ? 1 : -1);
-            });
-        }
     }
 }

@@ -4,6 +4,8 @@ import { inputs } from './config'
 
 export default ({ inputsFields = [] , handleChange = (e) => {e.preventDefault();} }) => {
     const updatedInputs = inputs.map(input => {
+        // if (inputsFields[input.name])
+        //add check - TODO
         return {...input, value: inputsFields[input.name]}
     })
 
