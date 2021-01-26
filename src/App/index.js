@@ -6,6 +6,7 @@ import history from '../helpers/history';
 import alertActions from '../actions/alers';
 import Home from '../pages/Home';
 import Login from '../pages/Login';
+import Edit from '../pages/Edit';
 
 export default () => {
     const alert = useSelector(state => state.alert);
@@ -27,6 +28,7 @@ export default () => {
                     <Router history={history}>
                         <Switch>
                             <PrivateRoute exact path="/" component={Home} />
+                            <PrivateRoute path="/edit/:id" component={Edit} />
                             <Route path="/login" component={Login} />
                             <Redirect from="*" to="/" />
                         </Switch>

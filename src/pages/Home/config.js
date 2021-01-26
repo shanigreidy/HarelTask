@@ -51,5 +51,7 @@ export const Table = {
         download: false,
         print: false,
         filter: true,
+        selectableRowsHideCheckboxes: true,
+        rowHover: true
     }
 }

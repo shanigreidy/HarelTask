@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 import { isMobile } from "react-device-detect";
 import authActions from '../../actions/authentication';
 import authHelper from '../../helpers/authentication';
-import Inputs from '../../components/login/Inputs';
+import Inputs from '../../components/pages/login/Inputs';
 
 export default () => {
     const [isloggingInProccess, setIsloggingInProccess] = useState(false);
@@ -17,8 +17,7 @@ export default () => {
     const dispatch = useDispatch();
     const location = useLocation();
 
-    const handleChange = (e) => {
-        const { name, value } = e.target;
+    const handleChange = ({ name, value }) => {
         setInputsFields(inputs => ({ ...inputs, [name]: value }));
     }
 
@@ -37,9 +36,9 @@ export default () => {
                 <h4>You are Already Logged in :)</h4>
                 :
                 <div>
-                <h2>Login</h2>
+                    <h2 style={{ marginBottom: '10px'}}>Login</h2>
                     <form name="form" onSubmit={handleSubmit}>
-                        <Inputs inputsFields={inputsFields} handleChange={handleChange} />
+                        <Inputs inputsFields={inputsFields} handleChange={e => handleChange(e.target)} />
                         <div className="form-group" style={{ display: 'flex' }}>
                             <button className="btn btn-primary" style={{width: '50%', margin: '20px auto', height: '50px'}}>
                                 {

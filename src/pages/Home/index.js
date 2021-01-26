@@ -2,7 +2,9 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import MUIDataTable from "mui-datatables";
 import { isMobile } from "react-device-detect";
+import history from '../../helpers/history';
 import usersActions from '../../actions/users';
+import alertActions from '../../actions/alers';
 import { Table } from './config';
 
 export default () => {
@@ -11,9 +13,12 @@ export default () => {
     const dispatch = useDispatch();
 
     const fetchUsersData = async () => {
-        //try catch - TODO
-        const usersData = await dispatch(usersActions.getUsers());
-        setUsers(usersData);
+        try {
+            const usersData = await dispatch(usersActions.getUsers());
+            setUsers(usersData);
+        } catch (err){
+            dispatch(alertActions.error(err.toString()));
+        }
     }
 
     useEffect(() => {
@@ -21,6 +26,7 @@ export default () => {
     }, []);
 
     const { columns, options } = Table;
+    options.onRowClick = rowData => history.push(`/edit/${rowData[0]}`);
     options.responsive = isMobile ? 'simple' : 'vertical';
 
     return (
