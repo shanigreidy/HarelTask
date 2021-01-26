@@ -38,7 +38,69 @@ export const Table = {
             filter: true,
             sort: true,
             customBodyRender: value => moment(new Date(value)).format(DATE_FORMAT),
-           }
+            filterType: 'custom',
+            customFilterListOptions: {
+              render: v => {
+                if (v[0] && v[1]) {
+                  return [`Date more than: ${v[0]}`, `Date less than: ${v[1]}`];
+                } else if (v[0]) {
+                  return `Date more than: ${v[0]}`;
+                } else if (v[1]) {
+                  return `Date less than: ${v[1]}`;
+                }
+                return false;
+              },
+              update: (filterList, filterPos, index) => {
+                if (filterPos === 0) {
+                  filterList[index].splice(filterPos, 1, '');
+                } else if (filterPos === 1) {
+                  filterList[index].splice(filterPos, 1);
+                } else if (filterPos === -1) {
+                  filterList[index] = [];
+                }
+
+                return filterList;
+              },
+            },
+            filterOptions: {
+              logic(date, filters) {
+                date.toString();
+                if (filters[0] && filters[1]) {
+                  return date < filters[0] || date > filters[1];
+                } else if (filters[0]) {
+                  return date < filters[0];
+                } else if (filters[1]) {
+                  return date > filters[1];
+                }
+                return false;
+              },
+              display: (filterList, onChange, index, column) => (
+                <div>
+                  <FormLabel>date</FormLabel>
+                  <FormGroup row>
+                    <TextField
+                      label="more"
+                      value={filterList[index][0] || ''}
+                      onChange={event => {
+                        filterList[index][0] = event.target.value;
+                        onChange(filterList[index], index, column);
+                      }}
+                      style={{ width: '45%', marginRight: '5%' }}
+                    />
+                    <TextField
+                      label="less"
+                      value={filterList[index][1] || ''}
+                      onChange={event => {
+                        filterList[index][1] = event.target.value;
+                        onChange(filterList[index], index, column);
+                      }}
+                      style={{ width: '45%' }}
+                    />
+                  </FormGroup>
+                </div>
+              ),
+            },
+          }
         },
         {
             label: "Phone",
@@ -50,11 +112,11 @@ export const Table = {
                 customFilterListOptions: {
                   render: v => {
                     if (v[0] && v[1]) {
-                      return [`More than: ${v[0]}`, `Less than: ${v[1]}`];
+                      return [`Phone more than: ${v[0]}`, `Phone less than: ${v[1]}`];
                     } else if (v[0]) {
-                      return `More than: ${v[0]}`;
+                      return `Phone more than: ${v[0]}`;
                     } else if (v[1]) {
-                      return `Less than: ${v[1]}`;
+                      return `Phone less than: ${v[1]}`;
                     }
                     return false;
                   },
