@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { Router, Route, Switch, Redirect } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
+import { isMobile } from "react-device-detect";
 import PrivateRoute from '../components/PrivateRoute';
 import history from '../helpers/history';
 import alertActions from '../actions/alers';
@@ -18,11 +19,19 @@ export default () => {
         });
     }, []);
 
+    const style = {
+        top: isMobile ? '200px' : '40px', 
+        margin: 'auto', 
+        background: 'unset', 
+        border: 'unset',
+        textAlign: 'center'
+    }
+
     return (
         <div className="container">
             <div>
                     {alert?.message &&
-                        <div className={`alert ${alert.type}`}>{alert.message}</div>
+                        <div className={`alert ${alert.type}`} style={style}>{alert.message}</div>
                     }
                 <div>
                     <Router history={history}>
